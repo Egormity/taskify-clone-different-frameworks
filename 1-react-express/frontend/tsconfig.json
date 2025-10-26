@@ -38,7 +38,7 @@
 		"src/**/*.tsx",
 		"src/**/*.d.ts",
 		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/boards.tsx",
-		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/settings.tsx",
+		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/index.tsx",
 		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/activity.tsx",
 		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/billing.tsx"
 	]

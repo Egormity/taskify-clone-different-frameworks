@@ -5,6 +5,7 @@ const MOCK_WORKSPACES = [
 		id: "1",
 		name: "Workspace 1",
 		logo: null,
+		subscriptionPlanName: "free",
 		modules: [
 			{ moduleTypeName: "boards" },
 			{ moduleTypeName: "activity" },
@@ -16,12 +17,14 @@ const MOCK_WORKSPACES = [
 		id: "2",
 		name: "Workspace 2",
 		logo: null,
+		subscriptionPlanName: "free",
 		modules: [{ moduleTypeName: "boards" }],
 	},
 	{
 		id: "3",
 		name: "Workspace 3",
 		logo: null,
+		subscriptionPlanName: "billed",
 		modules: [{ moduleTypeName: "boards" }, { moduleTypeName: "activity" }],
 	},
 ];
@@ -33,6 +36,7 @@ export const useStoreUser = create<{
 		id: string;
 		name: string;
 		logo: null;
+		subscriptionPlanName: string;
 		modules: Array<{ moduleTypeName: string }>;
 	}>;
 }>(set => ({

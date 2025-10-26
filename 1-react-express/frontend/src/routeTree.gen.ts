@@ -8,6 +8,8 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as LoginRouteImport } from './routes/login'
@@ -18,12 +20,28 @@ import { Route as LayoutUnauthenticatedTermsOfUseRouteImport } from './routes/_l
 import { Route as LayoutUnauthenticatedPrivacyPolicyRouteImport } from './routes/_layout-unauthenticated/privacy-policy'
 import { Route as LayoutUnauthenticatedHelloRouteImport } from './routes/_layout-unauthenticated/hello'
 import { Route as LayoutAuthenticatedLayoutWorkspacesRouteImport } from './routes/_layout-authenticated/_layout-workspaces'
-import { Route as LayoutAuthenticatedLayoutBoardRouteImport } from './routes/_layout-authenticated/_layout-board'
 import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/index'
-import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/settings'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/index'
+import { Route as LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRouteImport } from './routes/_layout-authenticated/workspaces.$workspaceId.boards.$boardId'
 import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/boards'
 import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/billing'
 import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/activity'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/index'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/settings'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/index'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations'
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteImport =
+  createFileRoute(
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId',
+  )()
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteImport =
+  createFileRoute(
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings',
+  )()
 
 const SignUpRoute = SignUpRouteImport.update({
   id: '/sign-up',
@@ -71,10 +89,11 @@ const LayoutAuthenticatedLayoutWorkspacesRoute =
     id: '/_layout-workspaces',
     getParentRoute: () => LayoutAuthenticatedRoute,
   } as any)
-const LayoutAuthenticatedLayoutBoardRoute =
-  LayoutAuthenticatedLayoutBoardRouteImport.update({
-    id: '/_layout-board',
-    getParentRoute: () => LayoutAuthenticatedRoute,
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteImport.update({
+    id: '/workspaces/$workspaceId',
+    path: '/workspaces/$workspaceId',
+    getParentRoute: () => LayoutAuthenticatedLayoutWorkspacesRoute,
   } as any)
 const LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute =
   LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRouteImport.update({
@@ -82,36 +101,116 @@ const LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute =
     path: '/workspaces/',
     getParentRoute: () => LayoutAuthenticatedLayoutWorkspacesRoute,
   } as any)
-const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute =
-  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRouteImport.update(
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRouteImport.update(
     {
-      id: '/workspaces/$workspaceId/settings',
-      path: '/workspaces/$workspaceId/settings',
-      getParentRoute: () => LayoutAuthenticatedLayoutWorkspacesRoute,
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute,
     } as any,
   )
+const LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute =
+  LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRouteImport.update({
+    id: '/workspaces/$workspaceId/boards/$boardId',
+    path: '/workspaces/$workspaceId/boards/$boardId',
+    getParentRoute: () => LayoutAuthenticatedRoute,
+  } as any)
 const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute =
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRouteImport.update(
     {
-      id: '/workspaces/$workspaceId/boards',
-      path: '/workspaces/$workspaceId/boards',
-      getParentRoute: () => LayoutAuthenticatedLayoutWorkspacesRoute,
+      id: '/boards',
+      path: '/boards',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute,
     } as any,
   )
 const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute =
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRouteImport.update(
     {
-      id: '/workspaces/$workspaceId/billing',
-      path: '/workspaces/$workspaceId/billing',
-      getParentRoute: () => LayoutAuthenticatedLayoutWorkspacesRoute,
+      id: '/billing',
+      path: '/billing',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute,
     } as any,
   )
 const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute =
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRouteImport.update(
     {
-      id: '/workspaces/$workspaceId/activity',
-      path: '/workspaces/$workspaceId/activity',
-      getParentRoute: () => LayoutAuthenticatedLayoutWorkspacesRoute,
+      id: '/activity',
+      path: '/activity',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteImport.update(
+    {
+      id: '/_layout-settings',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteImport.update(
+    {
+      id: '/settings',
+      path: '/settings',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRouteImport.update(
+    {
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRouteImport.update(
+    {
+      id: '/settings',
+      path: '/settings',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteImport.update(
+    {
+      id: '/_layout-members',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRouteImport.update(
+    {
+      id: '/members/',
+      path: '/members/',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRouteImport.update(
+    {
+      id: '/members/members',
+      path: '/members/members',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRouteImport.update(
+    {
+      id: '/members/invitations',
+      path: '/members/invitations',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute,
     } as any,
   )
 
@@ -123,10 +222,18 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof LayoutUnauthenticatedPrivacyPolicyRoute
   '/terms-of-use': typeof LayoutUnauthenticatedTermsOfUseRoute
   '/workspaces': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute
+  '/workspaces/$workspaceId': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteWithChildren
   '/workspaces/$workspaceId/activity': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute
   '/workspaces/$workspaceId/billing': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute
   '/workspaces/$workspaceId/boards': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute
-  '/workspaces/$workspaceId/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute
+  '/workspaces/$workspaceId/boards/$boardId': typeof LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute
+  '/workspaces/$workspaceId/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute
+  '/workspaces/$workspaceId/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren
+  '/workspaces/$workspaceId/settings/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute
+  '/workspaces/$workspaceId/settings/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute
+  '/workspaces/$workspaceId/settings/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
+  '/workspaces/$workspaceId/settings/members/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
+  '/workspaces/$workspaceId/settings/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -136,10 +243,16 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof LayoutUnauthenticatedPrivacyPolicyRoute
   '/terms-of-use': typeof LayoutUnauthenticatedTermsOfUseRoute
   '/workspaces': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute
+  '/workspaces/$workspaceId': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute
   '/workspaces/$workspaceId/activity': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute
   '/workspaces/$workspaceId/billing': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute
   '/workspaces/$workspaceId/boards': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute
-  '/workspaces/$workspaceId/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute
+  '/workspaces/$workspaceId/boards/$boardId': typeof LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute
+  '/workspaces/$workspaceId/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute
+  '/workspaces/$workspaceId/settings/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute
+  '/workspaces/$workspaceId/settings/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
+  '/workspaces/$workspaceId/settings/members/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
+  '/workspaces/$workspaceId/settings/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -148,16 +261,25 @@ export interface FileRoutesById {
   '/_layout-unauthenticated': typeof LayoutUnauthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
-  '/_layout-authenticated/_layout-board': typeof LayoutAuthenticatedLayoutBoardRoute
   '/_layout-authenticated/_layout-workspaces': typeof LayoutAuthenticatedLayoutWorkspacesRouteWithChildren
   '/_layout-unauthenticated/hello': typeof LayoutUnauthenticatedHelloRoute
   '/_layout-unauthenticated/privacy-policy': typeof LayoutUnauthenticatedPrivacyPolicyRoute
   '/_layout-unauthenticated/terms-of-use': typeof LayoutUnauthenticatedTermsOfUseRoute
   '/_layout-authenticated/_layout-workspaces/workspaces/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteWithChildren
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteWithChildren
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/activity': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/billing': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/boards': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute
-  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute
+  '/_layout-authenticated/workspaces/$workspaceId/boards/$boardId': typeof LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteWithChildren
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -169,10 +291,18 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/terms-of-use'
     | '/workspaces'
+    | '/workspaces/$workspaceId'
     | '/workspaces/$workspaceId/activity'
     | '/workspaces/$workspaceId/billing'
     | '/workspaces/$workspaceId/boards'
+    | '/workspaces/$workspaceId/boards/$boardId'
+    | '/workspaces/$workspaceId/'
     | '/workspaces/$workspaceId/settings'
+    | '/workspaces/$workspaceId/settings/settings'
+    | '/workspaces/$workspaceId/settings/'
+    | '/workspaces/$workspaceId/settings/members/invitations'
+    | '/workspaces/$workspaceId/settings/members/members'
+    | '/workspaces/$workspaceId/settings/members'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -182,10 +312,16 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/terms-of-use'
     | '/workspaces'
+    | '/workspaces/$workspaceId'
     | '/workspaces/$workspaceId/activity'
     | '/workspaces/$workspaceId/billing'
     | '/workspaces/$workspaceId/boards'
+    | '/workspaces/$workspaceId/boards/$boardId'
     | '/workspaces/$workspaceId/settings'
+    | '/workspaces/$workspaceId/settings/settings'
+    | '/workspaces/$workspaceId/settings/members/invitations'
+    | '/workspaces/$workspaceId/settings/members/members'
+    | '/workspaces/$workspaceId/settings/members'
   id:
     | '__root__'
     | '/'
@@ -193,16 +329,25 @@ export interface FileRouteTypes {
     | '/_layout-unauthenticated'
     | '/login'
     | '/sign-up'
-    | '/_layout-authenticated/_layout-board'
     | '/_layout-authenticated/_layout-workspaces'
     | '/_layout-unauthenticated/hello'
     | '/_layout-unauthenticated/privacy-policy'
     | '/_layout-unauthenticated/terms-of-use'
     | '/_layout-authenticated/_layout-workspaces/workspaces/'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings'
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/activity'
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/billing'
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/boards'
-    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/settings'
+    | '/_layout-authenticated/workspaces/$workspaceId/boards/$boardId'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/settings'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -278,12 +423,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesRouteImport
       parentRoute: typeof LayoutAuthenticatedRoute
     }
-    '/_layout-authenticated/_layout-board': {
-      id: '/_layout-authenticated/_layout-board'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof LayoutAuthenticatedLayoutBoardRouteImport
-      parentRoute: typeof LayoutAuthenticatedRoute
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId'
+      path: '/workspaces/$workspaceId'
+      fullPath: '/workspaces/$workspaceId'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesRoute
     }
     '/_layout-authenticated/_layout-workspaces/workspaces/': {
       id: '/_layout-authenticated/_layout-workspaces/workspaces/'
@@ -292,57 +437,195 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRouteImport
       parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesRoute
     }
-    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/settings': {
-      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/settings'
-      path: '/workspaces/$workspaceId/settings'
-      fullPath: '/workspaces/$workspaceId/settings'
-      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRouteImport
-      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesRoute
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/'
+      path: '/'
+      fullPath: '/workspaces/$workspaceId/'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute
+    }
+    '/_layout-authenticated/workspaces/$workspaceId/boards/$boardId': {
+      id: '/_layout-authenticated/workspaces/$workspaceId/boards/$boardId'
+      path: '/workspaces/$workspaceId/boards/$boardId'
+      fullPath: '/workspaces/$workspaceId/boards/$boardId'
+      preLoaderRoute: typeof LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRouteImport
+      parentRoute: typeof LayoutAuthenticatedRoute
     }
     '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/boards': {
       id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/boards'
-      path: '/workspaces/$workspaceId/boards'
+      path: '/boards'
       fullPath: '/workspaces/$workspaceId/boards'
       preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRouteImport
-      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesRoute
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute
     }
     '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/billing': {
       id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/billing'
-      path: '/workspaces/$workspaceId/billing'
+      path: '/billing'
       fullPath: '/workspaces/$workspaceId/billing'
       preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRouteImport
-      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesRoute
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute
     }
     '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/activity': {
       id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/activity'
-      path: '/workspaces/$workspaceId/activity'
+      path: '/activity'
       fullPath: '/workspaces/$workspaceId/activity'
       preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRouteImport
-      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesRoute
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings'
+      path: '/workspaces/$workspaceId'
+      fullPath: '/workspaces/$workspaceId'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings'
+      path: '/settings'
+      fullPath: '/workspaces/$workspaceId/settings'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/'
+      path: '/'
+      fullPath: '/workspaces/$workspaceId/settings/'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/settings': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/settings'
+      path: '/settings'
+      fullPath: '/workspaces/$workspaceId/settings/settings'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members'
+      path: '/settings'
+      fullPath: '/workspaces/$workspaceId/settings'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/'
+      path: '/members'
+      fullPath: '/workspaces/$workspaceId/settings/members'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members'
+      path: '/members/members'
+      fullPath: '/workspaces/$workspaceId/settings/members/members'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations'
+      path: '/members/invitations'
+      fullPath: '/workspaces/$workspaceId/settings/members/invitations'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute
     }
   }
 }
 
-interface LayoutAuthenticatedLayoutWorkspacesRouteChildren {
-  LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute
+interface LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteChildren {
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
+}
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteChildren: LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteChildren =
+  {
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute,
+  }
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute._addFileChildren(
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteChildren,
+  )
+
+interface LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteChildren {
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute
+}
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteChildren: LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteChildren =
+  {
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute,
+  }
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteWithChildren =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute._addFileChildren(
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteChildren,
+  )
+
+interface LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteChildren {
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteWithChildren
+}
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteChildren: LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteChildren =
+  {
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsRouteWithChildren,
+  }
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteWithChildren =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRoute._addFileChildren(
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteChildren,
+  )
+
+interface LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteChildren {
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteWithChildren
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute
-  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute
 }
 
-const LayoutAuthenticatedLayoutWorkspacesRouteChildren: LayoutAuthenticatedLayoutWorkspacesRouteChildren =
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteChildren: LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteChildren =
   {
-    LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute:
-      LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsRouteWithChildren,
     LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute:
       LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdActivityRoute,
     LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute:
       LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBillingRoute,
     LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute:
       LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdBoardsRoute,
-    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute:
-      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdSettingsRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdIndexRoute,
+  }
+
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteWithChildren =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute._addFileChildren(
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteChildren,
+  )
+
+interface LayoutAuthenticatedLayoutWorkspacesRouteChildren {
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteWithChildren
+}
+
+const LayoutAuthenticatedLayoutWorkspacesRouteChildren: LayoutAuthenticatedLayoutWorkspacesRouteChildren =
+  {
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesIndexRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteWithChildren,
   }
 
 const LayoutAuthenticatedLayoutWorkspacesRouteWithChildren =
@@ -351,14 +634,15 @@ const LayoutAuthenticatedLayoutWorkspacesRouteWithChildren =
   )
 
 interface LayoutAuthenticatedRouteChildren {
-  LayoutAuthenticatedLayoutBoardRoute: typeof LayoutAuthenticatedLayoutBoardRoute
   LayoutAuthenticatedLayoutWorkspacesRoute: typeof LayoutAuthenticatedLayoutWorkspacesRouteWithChildren
+  LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute: typeof LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute
 }
 
 const LayoutAuthenticatedRouteChildren: LayoutAuthenticatedRouteChildren = {
-  LayoutAuthenticatedLayoutBoardRoute: LayoutAuthenticatedLayoutBoardRoute,
   LayoutAuthenticatedLayoutWorkspacesRoute:
     LayoutAuthenticatedLayoutWorkspacesRouteWithChildren,
+  LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute:
+    LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute,
 }
 
 const LayoutAuthenticatedRouteWithChildren =

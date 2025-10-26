@@ -1,5 +1,6 @@
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { Button, ButtonProps } from "@mui/material";
+import { Link } from "@tanstack/react-router";
 import classNames from "classnames";
 import { useState } from "react";
 
@@ -16,50 +17,85 @@ export const Dropdown = <T extends { id: string | number; name: string; icon?: R
 	icon?: React.ReactNode;
 	data: T[];
 	onItemClick?: (item: T) => void;
-	getHeaderButtonProps?: ({ isOpen }: { isOpen: boolean }) => ButtonProps;
-	getItemButtonProps?: ({ item }: { item: T }) => ButtonProps;
+	getHeaderButtonProps?: {
+		getLinkProps?: (props: { isOpen: boolean }) => any;
+		getButtonProps?: (props: { isOpen: boolean; isActive: boolean | null }) => ButtonProps;
+	};
+	getItemButtonProps?: {
+		getLinkProps?: (props: { isOpen: boolean; item: T }) => any;
+		getButtonProps?: (props: { isOpen: boolean; isActive: boolean | null; item: T }) => ButtonProps;
+	};
 	isOpenInitial?: boolean;
 }) => {
 	const [isOpen, setIsOpen] = useState(isOpenInitial);
 	const toggleIsOpen = () => setIsOpen(s => !s);
 
 	//
-	const headerButtonProps = getHeaderButtonProps?.({ isOpen });
+	const getHeaderButton = (props: ButtonProps | undefined) => (
+		<Button
+			fullWidth
+			{...props}
+			className={classNames("gap-2 font-normal!", props?.className)}
+			onClick={e => {
+				toggleIsOpen();
+				props?.onClick?.(e);
+			}}
+		>
+			{icon}
+			<h3 className="text-lg">{name}</h3>
+			<KeyboardArrowDown className={classNames("ml-auto", isOpen && "rotate-180")} />
+		</Button>
+	);
+
+	//
+	const getItemButton = (item: T, props: ButtonProps | undefined) => (
+		<Button
+			key={item.id}
+			fullWidth
+			{...props}
+			className={classNames("gap-2 font-semibold!", props?.className)}
+			onClick={e => {
+				onItemClick?.(item);
+				props?.onClick?.(e);
+			}}
+		>
+			{item.icon}
+			<p className="mr-auto">{item.name}</p>
+		</Button>
+	);
 
 	//
 	return (
 		<div className="grid gap-1">
-			<Button
-				fullWidth
-				{...headerButtonProps}
-				className={classNames("gap-2", headerButtonProps?.className)}
-				onClick={e => {
-					toggleIsOpen();
-					headerButtonProps?.onClick?.(e);
-				}}
-			>
-				{icon}
-				<h3 className="text-lg">{name}</h3>
-				<KeyboardArrowDown className={classNames("ml-auto", isOpen && "rotate-180")} />
-			</Button>
+			{(() => {
+				const headerButtonLinkProps = getHeaderButtonProps?.getLinkProps?.({ isOpen });
+				if (headerButtonLinkProps)
+					return (
+						<Link {...headerButtonLinkProps}>
+							{({ isActive }) =>
+								getHeaderButton(getHeaderButtonProps?.getButtonProps?.({ isOpen, isActive }))
+							}
+						</Link>
+					);
+				return getHeaderButton(
+					getHeaderButton(getHeaderButtonProps?.getButtonProps?.({ isOpen, isActive: null })),
+				);
+			})()}
 			{isOpen && (
 				<div className="flex w-full flex-col gap-2 pl-7">
 					{data.map(item => {
-						const itemButtonProps = getItemButtonProps?.({ item });
-						return (
-							<Button
-								key={item.id}
-								fullWidth
-								{...itemButtonProps}
-								className={classNames("gap-2", itemButtonProps?.className)}
-								onClick={e => {
-									onItemClick?.(item);
-									itemButtonProps?.onClick?.(e);
-								}}
-							>
-								{item.icon}
-								<p className="mr-auto">{item.name}</p>
-							</Button>
+						const itemButtonLinkProps = getItemButtonProps?.getLinkProps?.({ isOpen, item });
+						if (itemButtonLinkProps)
+							return (
+								<Link {...itemButtonLinkProps} key={item.id}>
+									{({ isActive }) =>
+										getItemButton(item, getItemButtonProps?.getButtonProps?.({ isOpen, isActive, item }))
+									}
+								</Link>
+							);
+						return getItemButton(
+							item,
+							getItemButtonProps?.getButtonProps?.({ isOpen, isActive: null, item }),
 						);
 					})}
 				</div>
