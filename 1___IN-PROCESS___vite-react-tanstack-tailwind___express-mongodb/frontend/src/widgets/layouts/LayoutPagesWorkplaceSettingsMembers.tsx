@@ -10,7 +10,7 @@ export const LayoutPagesWorkplaceSettingsMembers = ({ children }: { children: Re
 	//
 	return (
 		<div>
-			<div className="h-20 space-y-3">
+			<div className="h-20 space-y-1">
 				<h1 className="text-4xl font-bold">Members</h1>
 				<h2 className="font-semibold text-stone-600">View and manage organization members</h2>
 			</div>

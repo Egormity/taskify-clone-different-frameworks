@@ -26,13 +26,6 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 				<h1 className="text-center text-3xl font-bold">{type === "login" ? "Log in" : "Sign up"}</h1>
 				<div className="mt-5 mb-3 flex flex-col gap-3">
 					<TextField
-						label="Username"
-						variant="filled"
-						fullWidth
-						required
-						{...register("username", { required: true })}
-					/>
-					<TextField
 						label="Email"
 						variant="filled"
 						fullWidth

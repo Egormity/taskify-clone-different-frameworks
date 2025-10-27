@@ -10,7 +10,7 @@ export const PageWorkspaceBilling = () => {
 	//
 	return (
 		<>
-			<div className="px-10 py-5">
+			<div>
 				<Button variant="contained" onClick={toggleOpen}>
 					Upgrade to pro
 				</Button>

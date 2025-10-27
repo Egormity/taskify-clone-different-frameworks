@@ -32,7 +32,8 @@ import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayout
 import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members'
 import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/index'
 import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members'
-import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/index'
+import { Route as LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRouteImport } from './routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/invite-members'
 
 const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdRouteImport =
   createFileRoute(
@@ -204,11 +205,20 @@ const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSett
         LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute,
     } as any,
   )
-const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute =
-  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRouteImport.update(
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRouteImport.update(
     {
-      id: '/members/invitations',
-      path: '/members/invitations',
+      id: '/members/invitations/',
+      path: '/members/invitations/',
+      getParentRoute: () =>
+        LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute,
+    } as any,
+  )
+const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute =
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRouteImport.update(
+    {
+      id: '/members/invitations/invite-members',
+      path: '/members/invitations/invite-members',
       getParentRoute: () =>
         LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute,
     } as any,
@@ -231,9 +241,10 @@ export interface FileRoutesByFullPath {
   '/workspaces/$workspaceId/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren
   '/workspaces/$workspaceId/settings/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute
   '/workspaces/$workspaceId/settings/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute
-  '/workspaces/$workspaceId/settings/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
   '/workspaces/$workspaceId/settings/members/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
   '/workspaces/$workspaceId/settings/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
+  '/workspaces/$workspaceId/settings/members/invitations/invite-members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute
+  '/workspaces/$workspaceId/settings/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -250,9 +261,10 @@ export interface FileRoutesByTo {
   '/workspaces/$workspaceId/boards/$boardId': typeof LayoutAuthenticatedWorkspacesWorkspaceIdBoardsBoardIdRoute
   '/workspaces/$workspaceId/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute
   '/workspaces/$workspaceId/settings/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute
-  '/workspaces/$workspaceId/settings/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
   '/workspaces/$workspaceId/settings/members/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
   '/workspaces/$workspaceId/settings/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
+  '/workspaces/$workspaceId/settings/members/invitations/invite-members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute
+  '/workspaces/$workspaceId/settings/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -277,9 +289,10 @@ export interface FileRoutesById {
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/settings': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsSettingsRoute
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsIndexRoute
-  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
   '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/invite-members': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute
+  '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/': typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -300,9 +313,10 @@ export interface FileRouteTypes {
     | '/workspaces/$workspaceId/settings'
     | '/workspaces/$workspaceId/settings/settings'
     | '/workspaces/$workspaceId/settings/'
-    | '/workspaces/$workspaceId/settings/members/invitations'
     | '/workspaces/$workspaceId/settings/members/members'
     | '/workspaces/$workspaceId/settings/members'
+    | '/workspaces/$workspaceId/settings/members/invitations/invite-members'
+    | '/workspaces/$workspaceId/settings/members/invitations'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -319,9 +333,10 @@ export interface FileRouteTypes {
     | '/workspaces/$workspaceId/boards/$boardId'
     | '/workspaces/$workspaceId/settings'
     | '/workspaces/$workspaceId/settings/settings'
-    | '/workspaces/$workspaceId/settings/members/invitations'
     | '/workspaces/$workspaceId/settings/members/members'
     | '/workspaces/$workspaceId/settings/members'
+    | '/workspaces/$workspaceId/settings/members/invitations/invite-members'
+    | '/workspaces/$workspaceId/settings/members/invitations'
   id:
     | '__root__'
     | '/'
@@ -345,9 +360,10 @@ export interface FileRouteTypes {
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members'
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/settings'
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/'
-    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations'
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/members'
     | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/invite-members'
+    | '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -521,30 +537,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRouteImport
       parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute
     }
-    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations': {
-      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations'
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/'
       path: '/members/invitations'
       fullPath: '/workspaces/$workspaceId/settings/members/invitations'
-      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRouteImport
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRouteImport
+      parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute
+    }
+    '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/invite-members': {
+      id: '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/_layout-members/members/invitations/invite-members'
+      path: '/members/invitations/invite-members'
+      fullPath: '/workspaces/$workspaceId/settings/members/invitations/invite-members'
+      preLoaderRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRouteImport
       parentRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRoute
     }
   }
 }
 
 interface LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteChildren {
-  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute
   LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute
+  LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute: typeof LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute
 }
 
 const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteChildren: LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteChildren =
   {
-    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute:
-      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsRoute,
     LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute:
       LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersMembersRoute,
     LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute:
       LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersIndexRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsInviteMembersRoute,
+    LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute:
+      LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersMembersInvitationsIndexRoute,
   }
 
 const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSettingsLayoutMembersRouteWithChildren =

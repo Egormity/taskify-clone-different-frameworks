@@ -24,17 +24,19 @@ const MOCK_DATA = {
 
 export const PageWorkspaceSettingsMembersMembers = () => {
 	return (
-		<CustomTable
-			columns={columnsWorkspaceSettingsMembersMembers({
-				roles: [
-					{ name: "Admin", id: "1" },
-					{ name: "User", id: "2" },
-					{ name: "Advanced user", id: "3" },
-				],
-				onSelectRole: ({ role, user }) => console.log(role, user),
-			})}
-			data={MOCK_DATA.data}
-			actionsProps={{ delete: { onClick: console.log } }}
-		/>
+		<div>
+			<CustomTable
+				columns={columnsWorkspaceSettingsMembersMembers({
+					roles: [
+						{ name: "Admin", id: "1" },
+						{ name: "User", id: "2" },
+						{ name: "Advanced user", id: "3" },
+					],
+					onSelectRole: ({ role, user }) => console.log(role, user),
+				})}
+				data={MOCK_DATA.data}
+				actionsProps={{ delete: { onClick: console.log } }}
+			/>
+		</div>
 	);
 };
