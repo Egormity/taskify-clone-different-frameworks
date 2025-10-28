@@ -7,6 +7,10 @@ import mongoSanitize from "express-mongo-sanitize";
 import compression from "compression";
 import hpp from "hpp";
 
+import UtilAppError from "./utils/utilAppError";
+
+import routesAuth from "./routes/routesAuth";
+
 // Create express app
 const app = express();
 
@@ -19,29 +23,29 @@ app.options("*", cors());
 
 // Development logging requests
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+	app.use(morgan("dev"));
 }
 
 // Set security http
 app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        connectSrc: ["'self'", "http://127.0.0.1:3000"],
-      },
-    },
-  })
+	helmet({
+		contentSecurityPolicy: {
+			directives: {
+				defaultSrc: ["'self'"],
+				connectSrc: ["'self'", "http://127.0.0.1:3000"],
+			},
+		},
+	}),
 );
 
 // Limit amount of requests
 app.use(
-  "/api",
-  rateLimit({
-    max: 100,
-    windowMs: 1000 * 60,
-    message: "Too many requests from this IP. Try again later",
-  })
+	"/api",
+	rateLimit({
+		max: 100,
+		windowMs: 1000 * 60,
+		message: "Too many requests from this IP. Try again later",
+	}),
 );
 
 // Enable json responses
@@ -53,17 +57,16 @@ app.use(mongoSanitize());
 // Prevent parameters pollution
 app.use(hpp());
 
-// Add request time to each request made
-app.use((req, _, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
-});
-
 // Compress responses
 app.use(compression());
 
-// TODO: Routes
-// TODO: Route not found
+// Routes
+app.use("/api/v1/auth", routesAuth);
+
+// Route not found
+app.all("*", (req, res, next) => {
+	next(new UtilAppError(`${req.originalUrl} not found`, 404));
+});
 
 // Default export the app
 module.exports = app;

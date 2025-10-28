@@ -1,5 +1,5 @@
 import { MoreHoriz } from "@mui/icons-material";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button, ButtonProps, Menu, MenuItem, SvgIconProps } from "@mui/material";
 import { useState } from "react";
 
 export const ButtonMenu = <
@@ -7,9 +7,13 @@ export const ButtonMenu = <
 >({
 	data,
 	onChange,
+	buttonProps,
+	iconProps,
 }: {
 	data: T[];
 	onChange?: (item: T) => void;
+	buttonProps?: ButtonProps;
+	iconProps?: SvgIconProps;
 }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = !!anchorEl;
@@ -31,9 +35,13 @@ export const ButtonMenu = <
 				aria-controls={open ? "basic-menu" : undefined}
 				aria-haspopup="true"
 				aria-expanded={open ? "true" : undefined}
-				onClick={handleOpen}
+				{...buttonProps}
+				onClick={e => {
+					handleOpen(e);
+					buttonProps?.onClick?.(e);
+				}}
 			>
-				<MoreHoriz />
+				<MoreHoriz {...iconProps} />
 			</Button>
 			<Menu
 				id="basic-menu"

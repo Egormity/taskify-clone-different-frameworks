@@ -1,3 +1,5 @@
+import { Board } from "@widgets/shared/Board";
+
 export const PageBoard = () => {
-	return <div>PageBoard</div>;
+	return <Board />;
 };

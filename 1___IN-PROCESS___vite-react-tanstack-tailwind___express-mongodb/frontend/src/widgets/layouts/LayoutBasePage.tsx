@@ -32,7 +32,7 @@ export const LayoutBasePage = ({
 				)}
 				<div
 					className={classnames(
-						"h-full overflow-auto lg:px-20 2xl:px-40",
+						"h-full overflow-auto px-5 lg:px-20 2xl:px-40",
 						headerProps && footerProps
 							? "max-h-[calc(100vh-64px*2)]"
 							: (headerProps || footerProps) && "max-h-[calc(100vh-64px)]",
