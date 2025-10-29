@@ -8,7 +8,7 @@ import { useStoreUser } from "@app/store/storeUser";
 
 import { ModalWorkspaceCreate } from "@widgets/Modals/ModalWorkspaceCreate";
 
-import { CONSTANTS_WORKSPACE_MODULES } from "@shared/constants/constantsWorkspaceModules";
+import { CONSTANTS_WORKSPACE_MODULES } from "@shared/constants/constants.workplaceModules";
 import { Dropdown } from "@shared/ui/Dropdown";
 
 export const LayoutPagesWorkspaces = ({ children }: { children: React.ReactNode }) => {

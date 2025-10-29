@@ -3,6 +3,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { ProviderMuiTheme } from "@app/providers/ProviderMuiTheme";
+import { ProviderQueryClient } from "@app/providers/ProviderQueryClient";
 
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
@@ -24,8 +25,10 @@ declare module "@tanstack/react-router" {
 // Render the application
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<ProviderMuiTheme>
-			<RouterProvider router={router} />
-		</ProviderMuiTheme>
+		<ProviderQueryClient>
+			<ProviderMuiTheme>
+				<RouterProvider router={router} />
+			</ProviderMuiTheme>
+		</ProviderQueryClient>
 	</StrictMode>,
 );

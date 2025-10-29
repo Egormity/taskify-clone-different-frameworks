@@ -48,6 +48,9 @@ importers:
       '@types/express':
         specifier: ^5.0.3
         version: 5.0.3
+      '@types/express-serve-static-core':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@types/hpp':
         specifier: ^0.2.6
         version: 0.2.6

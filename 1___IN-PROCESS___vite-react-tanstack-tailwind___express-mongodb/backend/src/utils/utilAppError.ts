@@ -1,4 +1,4 @@
-module.exports = class UtilAppError extends Error {
+export default class UtilAppError extends Error {
 	public statusCode: number;
 	public status: string;
 	public isOperational: boolean;
@@ -11,4 +11,4 @@ module.exports = class UtilAppError extends Error {
 
 		Error.captureStackTrace(this, this.constructor);
 	}
-};
+}

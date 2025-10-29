@@ -1,6 +1,9 @@
-import { Button, Link as LinkMui, TextField } from "@mui/material";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Button, Link, TextField } from "@mui/material";
+import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+
+import { TUserPost } from "@app/api/api/user/types";
+import { apiUser } from "@app/api/api/user/useApiUser";
 
 export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 	const navigate = useNavigate();
@@ -8,12 +11,13 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 		register,
 		handleSubmit,
 		formState: { isValid },
-	} = useForm();
+	} = useForm<TUserPost>();
 
 	//
-	const onSubmit = data => {
+	const { mutate } = apiUser.useDeleteOneById(); // type === "sign-up" ? ApiUser.postOne() : null;
+	const onSubmit = (data: TUserPost) => {
 		console.log(data);
-		navigate({ to: "/workspaces" });
+		mutate({ urlParams: {} });
 	};
 
 	//
@@ -53,8 +57,12 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 				</Button>
 				<div className="flex gap-1">
 					<p>{type === "login" ? "Don't have an account?" : "Already have an account?"}</p>
-					<Link to={type === "login" ? "/sign-up" : "/login"}>
-						<LinkMui color="info">{type === "login" ? "Sign up" : "Log in"}</LinkMui>
+					<Link
+						role="button"
+						color="info"
+						onClick={() => navigate({ to: type === "login" ? "/login" : "/sign-up" })}
+					>
+						{type === "login" ? "Sign up" : "Log in"}
 					</Link>
 				</div>
 			</form>
