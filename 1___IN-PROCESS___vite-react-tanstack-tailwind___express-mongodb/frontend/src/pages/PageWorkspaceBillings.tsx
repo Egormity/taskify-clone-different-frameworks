@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 
-import { ModalBillingUpgradeToPro } from "@widgets/Modals/ModalBillingUpgradeToPro";
+import { ModalBillingUpgradeToPro } from "@widgets/modals/ModalBillingUpgradeToPro";
 
 export const PageWorkspaceBilling = () => {
 	const [open, setOpen] = useState(false);

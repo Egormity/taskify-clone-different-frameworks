@@ -16,7 +16,7 @@ export const LayoutPagesUnauthenticated = ({ children }: { children: React.React
 						<Link to="/login" className="ml-auto">
 							<Button variant="outlined">Login</Button>
 						</Link>
-						<Link to="/sign-up">
+						<Link to="/signup">
 							<Button variant="contained">Get Taskify for free</Button>
 						</Link>
 					</>

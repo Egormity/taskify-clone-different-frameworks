@@ -2,20 +2,20 @@ import { Button, Link, TextField } from "@mui/material";
 import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 
-import { TUserPost } from "@app/api/api/user/types";
-import { apiUser } from "@app/api/api/user/useApiUser";
+import { TSignup } from "@app/api/api/auth/types";
+import { apiAuth } from "@app/api/api/auth/useApiAuth";
 
-export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
+export const PageAuth = ({ type }: { type: "login" | "signup" }) => {
 	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
 		formState: { isValid },
-	} = useForm<TUserPost>();
+	} = useForm<TSignup>();
 
 	//
-	const { mutate } = apiUser.usePostOne(); // type === "sign-up" ? ApiUser.postOne() : null;
-	const onSubmit = (data: TUserPost) => mutate({ data }, { onSuccess: () => alert("SUCCESS!") });
+	const { mutate, isPending } = type === "signup" ? apiAuth.useSignup() : apiAuth.useLogin();
+	const onSubmit = (data: TSignup) => mutate({ data }, { onSuccess: () => navigate({ to: "/workspaces" }) });
 
 	//
 	return (
@@ -40,7 +40,7 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 						required
 						{...register("password", { required: true })}
 					/>
-					{type === "sign-up" && (
+					{type === "signup" && (
 						<TextField
 							label="Confirm password"
 							variant="filled"
@@ -49,7 +49,14 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 						/>
 					)}
 				</div>
-				<Button variant="contained" color="info" fullWidth type="submit" disabled={!isValid}>
+				<Button
+					variant="contained"
+					color="info"
+					fullWidth
+					type="submit"
+					disabled={!isValid}
+					loading={isPending}
+				>
 					Continue
 				</Button>
 				<div className="flex gap-1">
@@ -57,7 +64,7 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 					<Link
 						color="info"
 						className="cursor-pointer"
-						onClick={() => navigate({ to: type === "login" ? "/sign-up" : "/login" })}
+						onClick={() => navigate({ to: type === "login" ? "/signup" : "/login" })}
 					>
 						{type === "login" ? "Sign up" : "Log in"}
 					</Link>

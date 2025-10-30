@@ -7,8 +7,11 @@ import helmet from "helmet";
 import compression from "compression";
 import hpp from "hpp";
 
-import UtilAppError from "./utils/utilAppError";
-import routerUser from "./routes/routerUser";
+import UtilAppError from "./utils/UtilAppError";
+import ControllerErrors from "./controllers/ControllerErrors";
+import routerAuth from "./routes/routerAuth";
+import routerWorkspace from "./routes/routerWorkspace";
+import cookieParser from "cookie-parser";
 
 // Create express app
 const app = express();
@@ -17,7 +20,13 @@ const app = express();
 app.enable("trust proxy");
 
 // Enable cors
-app.use(cors());
+app.use(
+	cors({
+		origin: "http://localhost:5173",
+		methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+		credentials: true,
+	}),
+);
 
 // Development logging requests
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
@@ -56,11 +65,18 @@ app.use(hpp());
 // Compress responses
 app.use(compression());
 
+// Add cookie parser middleware BEFORE your routes
+app.use(cookieParser());
+
 // Routes
-app.use("/api/v1/user", routerUser);
+app.use("/api/v1/auth", routerAuth);
+app.use("/api/v1/workspaces", routerWorkspace);
 
 // Route not found
 app.all(/.*/, (req, res, next) => next(new UtilAppError(404, `${req.originalUrl} not found`)));
+
+// Middleware to handle errors
+app.use(ControllerErrors);
 
 // Default export the app
 export default app;

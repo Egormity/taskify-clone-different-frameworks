@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { Model } from "mongoose";
 import utilSendResJson from "./utilSendResJson";
 import utilCatchAsync from "./utilCatchAsync";
-import UtilAppError from "./utilAppError";
+import UtilAppError from "./UtilAppError";
 
 //
 export default class UtilControllerBase {
-	static readonly getAll = <T>({ Model }: { Model: Model<T> }) =>
+	static readonly getMany = <T>({ Model }: { Model: Model<T> }) =>
 		utilCatchAsync(async (req, res) => {
 			const data = await Model.find();
 			utilSendResJson({ res, statusCode: 200, data });
@@ -24,6 +24,17 @@ export default class UtilControllerBase {
 	static readonly postOne = <T>({ Model }: { Model: Model<T> }) =>
 		utilCatchAsync(async (req, res) => {
 			const data = await Model.create(req.body);
+			utilSendResJson({ res, statusCode: 201, data });
+		});
+
+	//
+	static readonly putOneById = <T>({ Model }: { Model: Model<T> }) =>
+		utilCatchAsync(async (req, res, next) => {
+			const data = await Model.findByIdAndUpdate(req.params.id, req.body, {
+				new: true,
+				runValidators: true,
+			});
+			if (!data) return next(new UtilAppError(404, `No documents found with id: ${req.params.id}`));
 			utilSendResJson({ res, statusCode: 201, data });
 		});
 

@@ -1,14 +1,15 @@
 import { UseMutationOptions, UseMutationResult, useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 import { axiosBase } from "@app/api/base/axiosBase";
 
-import { TExtractUrlParamsRecord } from "@shared/types/types.shared";
+import { TExtractUrlParamsRecord, TResponseWrapper } from "@shared/types/types.api";
 
 //
 export const useApiMutation = <
-	TVariables = any,
-	TResponse = any,
+	TVariables = never,
+	TResponseData = never,
 	TError extends Error = AxiosError,
 	TUrl extends string = any,
 	TVariablesFormatted = { data?: TVariables; urlParams?: TExtractUrlParamsRecord<TUrl> },
@@ -19,17 +20,26 @@ export const useApiMutation = <
 }: {
 	url: TUrl;
 	method: "post" | "put" | "patch" | "delete";
-	useMutationOptions?: UseMutationOptions<AxiosResponse<TResponse>, TError, TVariablesFormatted>;
-}): UseMutationResult<AxiosResponse<TResponse>, TError, TVariablesFormatted> =>
-	useMutation<AxiosResponse<TResponse>, TError, TVariablesFormatted>({
+	useMutationOptions?: UseMutationOptions<
+		AxiosResponse<TResponseWrapper<TResponseData>>,
+		TError,
+		TVariablesFormatted
+	>;
+}): UseMutationResult<AxiosResponse<TResponseWrapper<TResponseData>>, TError, TVariablesFormatted> =>
+	useMutation<AxiosResponse<TResponseWrapper<TResponseData>>, TError, TVariablesFormatted>({
 		...useMutationOptions,
 		mutationKey: ["/user/postOne"],
 		mutationFn: async ({ data, urlParams }) => {
 			try {
-				return await (method === "delete" ? axiosBase.delete(url, { data }) : axiosBase[method](url, data));
+				const res = await (method === "delete"
+					? axiosBase.delete(url, { data })
+					: axiosBase[method](url, data));
+				if (res.data.message) toast.success(res.data.message);
+				return res;
 			} catch (error) {
-				if (error instanceof AxiosError || error instanceof Error) alert(error.message);
-				console.log(error);
+				console.log(useApiMutation, url, error);
+				if (error instanceof AxiosError) toast.error(error.response?.data.message || error.message);
+				else if (error instanceof Error) toast.error(error.message);
 				throw error;
 			}
 		},

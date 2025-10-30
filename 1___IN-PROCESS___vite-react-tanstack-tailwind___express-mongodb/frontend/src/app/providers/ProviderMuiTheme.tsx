@@ -1,7 +1,7 @@
 import { PaletteColorOptions, ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect, useMemo } from "react";
 
-export const ProviderMuiTheme = ({ children }: { children: React.ReactNode }) => {
+const ProviderMuiTheme = ({ children }: { children: React.ReactNode }) => {
 	const theme: { colors: { primary: PaletteColorOptions } } = useMemo(
 		() => ({
 			colors: {
@@ -88,3 +88,4 @@ export const ProviderMuiTheme = ({ children }: { children: React.ReactNode }) =>
 		</ThemeProvider>
 	);
 };
+export default ProviderMuiTheme;

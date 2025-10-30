@@ -3,7 +3,7 @@ import { Button, Tooltip } from "@mui/material";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { ModalBoardCreate } from "@widgets/Modals/ModalBoardCreate";
+import { ModalBoardCreate } from "@widgets/modals/ModalBoardCreate";
 
 const MOCK_BOARDS = {
 	tooltip: "TODO: Tooltip",

@@ -4,9 +4,10 @@ import { useParams } from "@tanstack/react-router";
 import classNames from "classnames";
 import { useState } from "react";
 
+import { apiWorkspaces } from "@app/api/api/workspace/apiWorkspace";
 import { useStoreUser } from "@app/store/storeUser";
 
-import { ModalWorkspaceCreate } from "@widgets/Modals/ModalWorkspaceCreate";
+import { ModalWorkspaceCreate } from "@widgets/modals/ModalWorkspaceCreate";
 
 import { CONSTANTS_WORKSPACE_MODULES } from "@shared/constants/constants.workplaceModules";
 import { Dropdown } from "@shared/ui/Dropdown";
@@ -20,6 +21,8 @@ export const LayoutPagesWorkspaces = ({ children }: { children: React.ReactNode 
 	const { workspaceId }: { workspaceId?: string } = useParams({
 		strict: false,
 	});
+
+	const test = apiWorkspaces.useGetOneById({ id: workspaceId });
 
 	//
 	const dataFormatted = workspaces?.map(workspace => ({

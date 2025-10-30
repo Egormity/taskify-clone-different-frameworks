@@ -11,7 +11,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LayoutUnauthenticatedRouteImport } from './routes/_layout-unauthenticated'
 import { Route as LayoutAuthenticatedRouteImport } from './routes/_layout-authenticated'
@@ -44,9 +44,9 @@ const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSett
     '/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings',
   )()
 
-const SignUpRoute = SignUpRouteImport.update({
-  id: '/sign-up',
-  path: '/sign-up',
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -227,7 +227,7 @@ const LayoutAuthenticatedLayoutWorkspacesWorkspacesWorkspaceIdLayoutSettingsSett
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/sign-up': typeof SignUpRoute
+  '/signup': typeof SignupRoute
   '/hello': typeof LayoutUnauthenticatedHelloRoute
   '/privacy-policy': typeof LayoutUnauthenticatedPrivacyPolicyRoute
   '/terms-of-use': typeof LayoutUnauthenticatedTermsOfUseRoute
@@ -249,7 +249,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/sign-up': typeof SignUpRoute
+  '/signup': typeof SignupRoute
   '/hello': typeof LayoutUnauthenticatedHelloRoute
   '/privacy-policy': typeof LayoutUnauthenticatedPrivacyPolicyRoute
   '/terms-of-use': typeof LayoutUnauthenticatedTermsOfUseRoute
@@ -272,7 +272,7 @@ export interface FileRoutesById {
   '/_layout-authenticated': typeof LayoutAuthenticatedRouteWithChildren
   '/_layout-unauthenticated': typeof LayoutUnauthenticatedRouteWithChildren
   '/login': typeof LoginRoute
-  '/sign-up': typeof SignUpRoute
+  '/signup': typeof SignupRoute
   '/_layout-authenticated/_layout-workspaces': typeof LayoutAuthenticatedLayoutWorkspacesRouteWithChildren
   '/_layout-unauthenticated/hello': typeof LayoutUnauthenticatedHelloRoute
   '/_layout-unauthenticated/privacy-policy': typeof LayoutUnauthenticatedPrivacyPolicyRoute
@@ -299,7 +299,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
-    | '/sign-up'
+    | '/signup'
     | '/hello'
     | '/privacy-policy'
     | '/terms-of-use'
@@ -321,7 +321,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
-    | '/sign-up'
+    | '/signup'
     | '/hello'
     | '/privacy-policy'
     | '/terms-of-use'
@@ -343,7 +343,7 @@ export interface FileRouteTypes {
     | '/_layout-authenticated'
     | '/_layout-unauthenticated'
     | '/login'
-    | '/sign-up'
+    | '/signup'
     | '/_layout-authenticated/_layout-workspaces'
     | '/_layout-unauthenticated/hello'
     | '/_layout-unauthenticated/privacy-policy'
@@ -371,16 +371,16 @@ export interface RootRouteChildren {
   LayoutAuthenticatedRoute: typeof LayoutAuthenticatedRouteWithChildren
   LayoutUnauthenticatedRoute: typeof LayoutUnauthenticatedRouteWithChildren
   LoginRoute: typeof LoginRoute
-  SignUpRoute: typeof SignUpRoute
+  SignupRoute: typeof SignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sign-up': {
-      id: '/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpRouteImport
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -697,7 +697,7 @@ const rootRouteChildren: RootRouteChildren = {
   LayoutAuthenticatedRoute: LayoutAuthenticatedRouteWithChildren,
   LayoutUnauthenticatedRoute: LayoutUnauthenticatedRouteWithChildren,
   LoginRoute: LoginRoute,
-  SignUpRoute: SignUpRoute,
+  SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

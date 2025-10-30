@@ -1,15 +1,7 @@
+import { TWorkspace } from "@app/api/api/workspace/types";
+
 export type TUser = {
 	_id: string;
 	email: string;
-};
-
-export type TUserPost = {
-	email: string;
-	password: string;
-	passwordConfirm: string;
-};
-
-export type TUserPatch = {
-	email: string;
-	password: string;
+	workspaces: Array<TWorkspace>;
 };

@@ -1,46 +1,16 @@
 import { create } from "zustand";
 
-const MOCK_WORKSPACES = [
-	{
-		id: "1",
-		name: "Workspace 1",
-		logo: null,
-		subscriptionPlanName: "free",
-		modules: [
-			{ moduleTypeName: "boards" },
-			{ moduleTypeName: "activity" },
-			{ moduleTypeName: "settings" },
-			{ moduleTypeName: "billing" },
-		],
-	},
-	{
-		id: "2",
-		name: "Workspace 2",
-		logo: null,
-		subscriptionPlanName: "free",
-		modules: [{ moduleTypeName: "boards" }],
-	},
-	{
-		id: "3",
-		name: "Workspace 3",
-		logo: null,
-		subscriptionPlanName: "billed",
-		modules: [{ moduleTypeName: "boards" }, { moduleTypeName: "activity" }],
-	},
-];
+import { TUser } from "@app/api/api/user/types";
 
 export const useStoreUser = create<{
 	isAuthenticated: boolean | null;
-	setIsAuthenticated: (value: boolean | null) => void;
-	workspaces: null | Array<{
-		id: string;
-		name: string;
-		logo: null;
-		subscriptionPlanName: string;
-		modules: Array<{ moduleTypeName: string }>;
-	}>;
+	user: TUser | null;
+	setUser: (user: TUser | null) => void;
 }>(set => ({
 	isAuthenticated: null,
-	setIsAuthenticated: isAuthenticated => set({ isAuthenticated }),
-	workspaces: MOCK_WORKSPACES,
+	user: JSON.parse(localStorage.getItem("user") || "null"),
+	setUser: user => {
+		localStorage.setItem("user", JSON.stringify(user));
+		set({ user, isAuthenticated: !!user });
+	},
 }));

@@ -43,16 +43,3 @@ export type RecursiveNever<T> = RecursiveReplace<T, never>;
 export type ObjectPick<T, K extends keyof T> = {
 	[P in K]: T[P];
 };
-
-//
-export type TExtractUrlParams<T extends string> = T extends `${string}/:${infer Param}/${infer Rest}`
-	? Param | TExtractUrlParams<`/${Rest}`>
-	: T extends `${string}/:${infer Param}`
-		? Param
-		: "";
-
-//
-export type TExtractUrlParamsRecord<TUrl extends string> = Record<
-	TExtractUrlParams<TUrl>,
-	NullUndefinedAble<string>
->;

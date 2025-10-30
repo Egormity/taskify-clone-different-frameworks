@@ -17,7 +17,7 @@ export const PageHello = () => {
 				Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office,
 				the way your team works is unique - accomplish it all with Taskify.
 			</h4>
-			<Link to="/sign-up">
+			<Link to="/signup">
 				<Button variant="contained" className="!px-6 !py-3">
 					Get Taskify for free
 				</Button>
