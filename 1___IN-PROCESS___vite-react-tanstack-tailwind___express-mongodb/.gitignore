@@ -35,7 +35,5 @@ storybook-static
 
 # generated
 .gen.ts
-*.env
-.env
-.env.production
+.env*
 .tanstack
