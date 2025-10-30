@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import UtilControllerBase from "../utils/UtilControllerBase";
-import ModelUser from "../models/ModelUser123";
+import ModelUser from "../models/ModelUser";
 
 export default class ControllerUsers {
 	static readonly getAll = UtilControllerBase.getAll({ Model: ModelUser });
