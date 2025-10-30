@@ -11,7 +11,7 @@ export const useApiMutation = <
 	TResponse = any,
 	TError extends Error = AxiosError,
 	TUrl extends string = any,
-	TVariablesFormatted = { data: TVariables; urlParams: TExtractUrlParamsRecord<TUrl> },
+	TVariablesFormatted = { data?: TVariables; urlParams?: TExtractUrlParamsRecord<TUrl> },
 >({
 	url,
 	method,
@@ -24,7 +24,7 @@ export const useApiMutation = <
 	useMutation<AxiosResponse<TResponse>, TError, TVariablesFormatted>({
 		...useMutationOptions,
 		mutationKey: ["/user/postOne"],
-		mutationFn: async ({ data }) => {
+		mutationFn: async ({ data, urlParams }) => {
 			try {
 				return await (method === "delete" ? axiosBase.delete(url, { data }) : axiosBase[method](url, data));
 			} catch (error) {

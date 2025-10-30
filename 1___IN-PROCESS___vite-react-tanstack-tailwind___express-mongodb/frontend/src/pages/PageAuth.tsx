@@ -14,11 +14,8 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 	} = useForm<TUserPost>();
 
 	//
-	const { mutate } = apiUser.useDeleteOneById(); // type === "sign-up" ? ApiUser.postOne() : null;
-	const onSubmit = (data: TUserPost) => {
-		console.log(data);
-		mutate({ urlParams: {} });
-	};
+	const { mutate } = apiUser.usePostOne(); // type === "sign-up" ? ApiUser.postOne() : null;
+	const onSubmit = (data: TUserPost) => mutate({ data }, { onSuccess: () => alert("SUCCESS!") });
 
 	//
 	return (
@@ -58,9 +55,9 @@ export const PageAuth = ({ type }: { type: "login" | "sign-up" }) => {
 				<div className="flex gap-1">
 					<p>{type === "login" ? "Don't have an account?" : "Already have an account?"}</p>
 					<Link
-						role="button"
 						color="info"
-						onClick={() => navigate({ to: type === "login" ? "/login" : "/sign-up" })}
+						className="cursor-pointer"
+						onClick={() => navigate({ to: type === "login" ? "/sign-up" : "/login" })}
 					>
 						{type === "login" ? "Sign up" : "Log in"}
 					</Link>
