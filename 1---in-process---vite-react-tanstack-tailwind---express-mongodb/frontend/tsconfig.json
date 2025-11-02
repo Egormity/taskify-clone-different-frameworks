@@ -1,0 +1,53 @@
+// tsconfig.app.json
+{
+	"compilerOptions": {
+		"composite": true,
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+		"target": "ES2023",
+		"useDefineForClassFields": true,
+		"lib": ["ES2023", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"skipLibCheck": true,
+
+		/* Path mapping */
+		"baseUrl": ".",
+		"paths": {
+			"@/api": ["./src/app/api/index.ts"],
+			"@/providers": ["./src/app/providers/index.ts"],
+			"@/store": ["./src/app/store/index.ts"],
+
+			"@/pages": ["./src/pages/index.ts"],
+			"@/assets": ["./src/shared/assets/index.ts"],
+			"@/constants": ["./src/shared/constants/index.ts"],
+			"@/hooks": ["./src/shared/hooks/index.ts"],
+			"@/types": ["./src/shared/types/index.ts"],
+			"@/ui": ["./src/shared/ui/index.ts"],
+
+			"@/widgets": ["./src/widgets/index.ts"]
+		},
+
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"moduleDetection": "force",
+		"noEmit": true,
+		"jsx": "react-jsx",
+
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.d.ts",
+		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/boards.tsx",
+		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/_layout-settings/settings/index.tsx",
+		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/activity.tsx",
+		"src/routes/_layout-authenticated/_layout-workspaces/workspaces/$workspaceId/billing.tsx"
+	]
+}

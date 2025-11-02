@@ -1,5 +1,0 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-export const Route = createFileRoute("/_layout-unauthenticated/terms-of-use")({
-	component: () => import("@pages/PageTermsOfUse").then(m => m.PageTermsOfUse),
-});
