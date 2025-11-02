@@ -43,7 +43,7 @@ axiosBase.interceptors.response.use(
 			replaceToAuth();
 			throw error;
 		}
-		if (originalRequest.url?.startsWith("/auth")) throw error;
+		if (originalRequest.url !== "/auth/me" && originalRequest.url?.startsWith("/auth")) throw error;
 
 		// Если обновление уже запущено — ждём его завершения, иначе запускаем
 		if (!refreshTokenPromise)

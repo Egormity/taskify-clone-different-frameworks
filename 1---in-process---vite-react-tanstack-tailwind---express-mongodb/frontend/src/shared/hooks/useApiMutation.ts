@@ -39,7 +39,6 @@ export const useApiMutation = <
 			} catch (error) {
 				console.log("useApiMutation", url, error);
 				if (error instanceof AxiosError) toast.error(error.response?.data.message || error.message);
-				else if (error instanceof Error) toast.error(error.message);
 				throw error;
 			}
 		},

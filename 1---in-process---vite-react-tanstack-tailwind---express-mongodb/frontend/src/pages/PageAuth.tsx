@@ -1,12 +1,16 @@
 import { Button, Link, TextField } from "@mui/material";
 import { useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { TLogin, TSignup, apiAuth } from "@/api";
 
+import { useStoreUser } from "@/store";
+
 import { ButtonLogo } from "@/ui";
 
 export const PageAuth = ({ type }: { type: "login" | "signup" }) => {
+	const { user } = useStoreUser();
 	const navigate = useNavigate();
 	const {
 		register,
@@ -20,6 +24,11 @@ export const PageAuth = ({ type }: { type: "login" | "signup" }) => {
 	const { mutate, isPending } = type === "signup" ? apiAuth.useSignup() : apiAuth.useLogin();
 	const onSubmit = (data: TSignup) =>
 		mutate({ data: data as any }, { onSuccess: () => navigate({ to: "/workspaces" }) });
+
+	//
+	useEffect(() => {
+		if (user) navigate({ to: "/workspaces" });
+	}, [user]);
 
 	//
 	return (

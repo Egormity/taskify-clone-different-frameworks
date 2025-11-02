@@ -19,6 +19,8 @@ export const useApiQuery = <
 	useQueryOptions,
 	onSuccess,
 	onError,
+	isToastSuccess = true,
+	isToastError = true,
 }: {
 	url: string;
 	config?: AxiosRequestConfig;
@@ -29,6 +31,8 @@ export const useApiQuery = <
 	>;
 	onSuccess?: (data: AxiosResponse<TResponseWrapper<TResponseData>>) => void;
 	onError?: (data: AxiosError) => void;
+	isToastSuccess?: boolean;
+	isToastError?: boolean;
 }): UseQueryResult<AxiosResponse<TResponseWrapper<TResponseData>>, AxiosError> & {
 	flatData: TFlatData;
 	innerData: TResponseWrapper<TResponseData> | null;
@@ -39,13 +43,13 @@ export const useApiQuery = <
 		queryFn: async () => {
 			try {
 				const res = await axiosBase.get(url, { ...config, params: { ...config?.params, ...params } });
-				if (res.data.message) toast.success(res.data.message);
-				if (onSuccess) onSuccess(res);
+				if (res.data.message && isToastSuccess) toast.success(res.data.message);
+				onSuccess?.(res);
 				return res;
 			} catch (error) {
 				console.log("useApiQuery", url, error);
-				if (error instanceof AxiosError) toast.error(error.response?.data.message || error.message);
-				else if (error instanceof Error) toast.error(error.message);
+				if (error instanceof AxiosError && isToastError)
+					toast.error(error.response?.data.message || error.message);
 				onError?.(error as AxiosError);
 				throw error;
 			}

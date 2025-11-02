@@ -21,8 +21,14 @@ export const schemaWorkspace = new mongoose.Schema<TWorkspace>(
 		members: {
 			type: [
 				{
-					type: mongoose.Schema.Types.ObjectId,
-					ref: EModels.USER,
+					user: {
+						type: mongoose.Schema.Types.ObjectId,
+						ref: EModels.USER,
+					},
+					role: {
+						type: mongoose.Schema.Types.ObjectId,
+						ref: EModels.ROLE,
+					},
 				},
 			],
 			validate: {

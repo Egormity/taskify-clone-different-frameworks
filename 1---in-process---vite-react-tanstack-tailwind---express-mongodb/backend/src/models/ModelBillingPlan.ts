@@ -4,7 +4,7 @@ import { EModels } from "../constants/constants.models";
 export type TBillingPlan = Document & {
 	name: string;
 	price: number;
-	duration: "monthly";
+	description: string;
 };
 
 export const schemaBillingPlan = new mongoose.Schema<TBillingPlan>(
@@ -12,12 +12,13 @@ export const schemaBillingPlan = new mongoose.Schema<TBillingPlan>(
 		name: {
 			type: String,
 			required: true,
+			unique: true,
 		},
 		price: {
 			type: Number,
 			required: true,
 		},
-		duration: {
+		description: {
 			type: String,
 			required: true,
 		},

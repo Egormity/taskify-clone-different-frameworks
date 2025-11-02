@@ -21,6 +21,18 @@ export default defineConfig([
 		},
 		rules: {
 			"@typescript-eslint/no-explicit-any": "warn",
+			"no-restricted-imports": [
+				"error",
+				{
+					patterns: [
+						{
+							// "group": ["../../", "../../*", "src/*", "!./*"], // Blocks all "../../*" and absolute "src/*" imports
+							group: ["src/*", "!./*"], // Blocks all absolute "src/*" imports
+							message: "Only same-directory imports (./*) are allowed. Use @ aliases instead",
+						},
+					],
+				},
+			],
 		},
 	},
 ]);

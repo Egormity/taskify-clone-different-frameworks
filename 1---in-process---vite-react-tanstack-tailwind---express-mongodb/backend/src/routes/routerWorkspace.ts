@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.use(ControllerAuth.protect);
 
-router.route("/").get(ControllerWorkspace.getMyMany).post(ControllerWorkspace.postOne);
-
+router.get("/my-many", ControllerWorkspace.getMyMany);
+router.post("/", ControllerWorkspace.postOne);
 router
 	.route("/:id")
 	.get(ControllerWorkspace.getOneById)

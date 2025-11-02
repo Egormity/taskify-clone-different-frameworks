@@ -32,6 +32,7 @@ const useGetMe = () =>
 		useQueryOptions: { queryKey: ["/auth/me"], retry: false },
 		onSuccess: data => useStoreUser.getState().setUser(data.data.user || null),
 		onError: () => useStoreUser.getState().setUser(null),
+		isToastError: false,
 	});
 
 //
