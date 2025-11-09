@@ -1,8 +1,0 @@
-export enum EModels {
-	ACTIVITY = "ACTIVITY",
-	BOARD = "BOARD",
-	USER = "USER",
-	WORKSPACE = "WORKSPACE",
-	BILLING_PLAN = "BILLING_PLAN",
-	ROLE = "ROLE",
-}
